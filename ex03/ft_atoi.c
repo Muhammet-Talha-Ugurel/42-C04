@@ -6,39 +6,45 @@
 /*   By: mugurel <muhammedtalhaugurel@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 05:02:42 by mugurel           #+#    #+#             */
-/*   Updated: 2022/10/23 21:26:31 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/10/23 22:23:39 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+char	*ft_whitespace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
+		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	{
+		i++;
+	}
+	return (&str[i]);
+}
 
 int	ft_atoi(char *str)
 {
-	int	i;
-	int	n;
-	int	norp;
+	int		i;
+	int		mult;
+	int		nb;
+	char	*onum;
 
+	mult = 1;
+	nb = 0;
 	i = 0;
-	norp = 1;
-	while (str[i] == ' ' || (str[i] >= 10 && str[i] <= 13)
-		|| str[i] == '-' || str[i] == '+')
+	onum = ft_whitespace(str);
+	while (onum[i] == '-' || onum[i] == '+')
 	{
-		if (str[i] == '-')
-			norp = norp * -1;
+		if (onum[i] == '-')
+		mult *= -1;
 		i++;
 	}
-	if (str == "2147483648")
-		return (2147483647);
-	while (str[i] >= '0' && str[i] <= '9')
+	while (onum[i] >= '0' && onum[i] <= '9')
 	{
-		n = (n * 10) + (str[i] - 48);
+		nb = (nb * 10) + (onum[i] - '0');
 		i++;
 	}
-	n = n * norp;
-	return (n);
-}
-
-int main(void)
-{
-	ft_atoi("-2147483648");
+	nb *= mult;
+	return (nb);
 }

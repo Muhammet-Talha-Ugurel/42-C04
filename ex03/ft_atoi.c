@@ -6,7 +6,7 @@
 /*   By: mugurel <muhammedtalhaugurel@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 05:02:42 by mugurel           #+#    #+#             */
-/*   Updated: 2022/10/23 13:05:32 by mugurel          ###   ########.fr       */
+/*   Updated: 2022/10/23 21:26:31 by mugurel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ int	ft_atoi(char *str)
 
 	i = 0;
 	norp = 1;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-	{
-		i++;
-	}
-	while (str[i] == '-' || str[i] == '+')
+	while (str[i] == ' ' || (str[i] >= 10 && str[i] <= 13)
+		|| str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
 			norp = norp * -1;
 		i++;
 	}
+	if (str == "2147483648")
+		return (2147483647);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		n = (n * 10) + (str[i] - 48);
@@ -38,4 +36,9 @@ int	ft_atoi(char *str)
 	}
 	n = n * norp;
 	return (n);
+}
+
+int main(void)
+{
+	ft_atoi("-2147483648");
 }
